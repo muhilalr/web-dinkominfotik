@@ -29,4 +29,34 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function pages()
+    {
+        return $this->hasMany(Page::class, 'created_by');
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class, 'author_id');
+    }
+
+    public function galeriFotos()
+    {
+        return $this->hasMany(GaleriFoto::class, 'created_by');
+    }
+
+    public function videoKegiatans()
+    {
+        return $this->hasMany(VideoKegiatan::class, 'created_by');
+    }
+
+    public function bankData()
+    {
+        return $this->hasMany(BankData::class, 'created_by');
+    }
+
+    public function pengumuman()
+    {
+        return $this->hasMany(Pengumuman::class, 'created_by');
+    }
 }
