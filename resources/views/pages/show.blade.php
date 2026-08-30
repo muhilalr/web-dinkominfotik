@@ -13,7 +13,7 @@
       </svg>
     </div>
 
-    <div class="container relative z-10 mx-auto px-4">
+    <div class="container relative z-10 mx-auto px-4 md:px-12">
       <!-- Breadcrumb Navigation -->
       <nav
         class="mb-4 flex items-center gap-2 overflow-x-auto whitespace-nowrap pb-1 text-xs font-medium uppercase tracking-wider text-blue-100/80">
@@ -171,47 +171,29 @@
 
       <!-- RIGHT SIDEBAR START -->
       <aside class="flex flex-col gap-6 lg:col-span-1">
-        <!-- Navigation Widget / Related Pages -->
-        <div class="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
-          <h3 class="mb-4 flex items-center gap-2 border-b border-slate-100 pb-3 text-base font-bold text-slate-800">
-            <svg class="text-utama h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
-            </svg>
-            Menu Profil
-          </h3>
-          <ul class="space-y-1.5 text-xs font-medium">
-            <li>
-              <a href="#"
-                class="text-utama border-utama block rounded-lg border-l-4 bg-blue-50 px-3 py-2.5 font-bold transition-all">
-                Tugas Pokok dan Fungsi
-              </a>
-            </li>
-            <li>
-              <a href="#"
-                class="hover:text-utama block rounded-lg px-3 py-2.5 text-slate-600 transition-all hover:bg-slate-50">
-                Struktur Organisasi
-              </a>
-            </li>
-            <li>
-              <a href="#"
-                class="hover:text-utama block rounded-lg px-3 py-2.5 text-slate-600 transition-all hover:bg-slate-50">
-                Rencana Strategis (Renstra)
-              </a>
-            </li>
-            <li>
-              <a href="#"
-                class="hover:text-utama block rounded-lg px-3 py-2.5 text-slate-600 transition-all hover:bg-slate-50">
-                Dokumen Perencanaan
-              </a>
-            </li>
-            <li>
-              <a href="#"
-                class="hover:text-utama block rounded-lg px-3 py-2.5 text-slate-600 transition-all hover:bg-slate-50">
-                Laporan SKM
-              </a>
-            </li>
-          </ul>
-        </div>
+        @if ($sidebarChildren->count())
+          <!-- Navigation Widget / Related Pages -->
+          <div class="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
+            <h3 class="mb-4 flex items-center gap-2 border-b border-slate-100 pb-3 text-base font-bold text-slate-800">
+              <svg class="text-utama h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
+              </svg>
+              {{ $sidebarTitle }}
+            </h3>
+            <ul class="space-y-1.5 text-xs font-medium">
+              @foreach ($sidebarChildren as $child)
+                <li>
+                  <a href="{{ $child->getUrl() }}"
+                    class="{{ $child->id === $currentMenuId
+                        ? 'text-utama border-utama block rounded-lg border-l-4 bg-blue-50 px-3 py-2.5 font-bold transition-all'
+                        : 'hover:text-utama block rounded-lg px-3 py-2.5 text-slate-600 transition-all hover:bg-slate-50' }}">
+                    {{ $child->judul }}
+                  </a>
+                </li>
+              @endforeach
+            </ul>
+          </div>
+        @endif
 
         <!-- Quick Services Widget -->
         <div class="bg-linear-to-br from-utama rounded-2xl to-blue-900 p-6 text-white shadow-sm">

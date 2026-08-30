@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
     'slug',
     'konten',
     'is_published',
-    'created_by'
+    'created_by',
 ])]
 class Page extends Model
 {
@@ -22,6 +22,16 @@ class Page extends Model
         return [
             'is_published' => 'boolean',
         ];
+    }
+
+    public function getTitleAttribute(): string
+    {
+        return $this->judul;
+    }
+
+    public function getContentAttribute(): string
+    {
+        return $this->konten;
     }
 
     public function user()
