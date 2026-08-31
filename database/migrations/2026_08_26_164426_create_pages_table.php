@@ -17,9 +17,6 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->longText('konten');
             $table->boolean('is_published')->default(false);
-            $table->foreignId('created_by')
-                ->constrained('users')
-                ->cascadeOnDelete();
             $table->timestamps();
         });
     }

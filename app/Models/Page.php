@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Model;
     'slug',
     'konten',
     'is_published',
-    'created_by',
 ])]
 class Page extends Model
 {
@@ -32,10 +31,5 @@ class Page extends Model
     public function getContentAttribute(): string
     {
         return $this->konten;
-    }
-
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'created_by');
     }
 }

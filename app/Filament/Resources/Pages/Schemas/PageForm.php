@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\Pages\Schemas;
 
-use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -18,7 +17,7 @@ class PageForm
                 TextInput::make('judul')
                     ->required()
                     ->live(onBlur: true)
-                    ->afterStateUpdated(fn ($state, callable $set) => $set('slug', Str::slug($state))),
+                    ->afterStateUpdated(fn($state, callable $set) => $set('slug', Str::slug($state))),
 
                 TextInput::make('slug')
                     ->required()
@@ -31,10 +30,6 @@ class PageForm
                 Toggle::make('is_published')
                     ->label('Publikasikan')
                     ->default(true)
-                    ->required(),
-
-                Hidden::make('created_by')
-                    ->default(fn () => auth()->id())
                     ->required(),
             ]);
     }

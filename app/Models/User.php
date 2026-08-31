@@ -30,11 +30,6 @@ class User extends Authenticatable
         ];
     }
 
-    public function pages()
-    {
-        return $this->hasMany(Page::class, 'created_by');
-    }
-
     public function posts()
     {
         return $this->hasMany(Post::class, 'author_id');
