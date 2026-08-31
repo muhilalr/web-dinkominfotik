@@ -18,12 +18,6 @@ return new class extends Migration
                 ->nullable()
                 ->constrained('kategoris')
                 ->nullOnDelete();
-
-            $table->foreignId('author_id')
-                ->nullable()
-                ->constrained('users')
-                ->nullOnDelete();
-
             $table->enum('tipe', ['berita', 'artikel'])->default('berita');
             $table->string('judul');
             $table->string('slug')->unique();
