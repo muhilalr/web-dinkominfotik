@@ -139,7 +139,7 @@
 
               <!-- Title -->
               <h3 class="mb-2 line-clamp-2 text-base font-bold text-slate-800 hover:text-blue-600">
-                <a href="#">
+                <a href="{{ route('posts.show', ['tipe' => $post->tipe, 'slug' => $post->slug]) }}">
                   {{ $post->judul }}
                 </a>
               </h3>
@@ -152,7 +152,7 @@
               <!-- Footer/Link -->
               <div class="mt-auto flex items-center justify-between border-t border-slate-100 pt-3">
                 <span class="text-[11px] font-medium text-slate-400">Dinkominfotik Bangka</span>
-                <a href="#"
+                <a href="{{ route('posts.show', ['tipe' => $post->tipe, 'slug' => $post->slug]) }}"
                   class="text-utama inline-flex items-center gap-1 text-xs font-bold transition-colors hover:text-blue-900">
                   Baca Selengkapnya
                   <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

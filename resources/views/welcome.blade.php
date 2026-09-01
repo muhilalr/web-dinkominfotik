@@ -64,12 +64,12 @@
               </div>
               <h2
                 class="mb-3 text-base font-bold leading-snug transition-colors hover:text-blue-300 md:text-2xl lg:text-3xl">
-                <a href="{{ route('home') }}">{{ $headline->judul }}</a>
+                <a href="{{ route('posts.show', ['tipe' => $headline->tipe, 'slug' => $headline->slug]) }}">{{ $headline->judul }}</a>
               </h2>
               <p class="mb-4 line-clamp-2 hidden text-sm text-slate-300 md:block">
                 {!! Str::limit(strip_tags($headline->konten), 200) !!}
               </p>
-              <a href="{{ route('home') }}"
+              <a href="{{ route('posts.show', ['tipe' => $headline->tipe, 'slug' => $headline->slug]) }}"
                 class="bg-utama inline-flex items-center gap-2 rounded-lg px-5 py-2.5 text-xs font-semibold text-white shadow transition-all hover:bg-blue-900 md:text-sm">
                 Baca Selengkapnya
                 <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -137,7 +137,7 @@
                       <span
                         class="mb-1 inline-block rounded bg-blue-50 px-2 py-0.5 text-[10px] font-semibold text-blue-600">{{ $berita->kategori?->nama ?? '' }}</span>
                       <h3 class="hover:text-utama line-clamp-2 text-sm font-bold text-slate-800 transition-colors">
-                        <a href="{{ route('home') }}">{{ $berita->judul }}</a>
+                        <a href="{{ route('posts.show', ['tipe' => $berita->tipe, 'slug' => $berita->slug]) }}">{{ $berita->judul }}</a>
                       </h3>
                     </div>
                     <p class="mt-1 text-[11px] text-slate-400">{{ $berita->published_at?->diffForHumans() ?? '' }}</p>
@@ -171,7 +171,7 @@
                       <span
                         class="mb-1 inline-block rounded bg-purple-50 px-2 py-0.5 text-[10px] font-semibold text-purple-600">{{ $artikel->kategori?->nama ?? '' }}</span>
                       <h3 class="hover:text-utama line-clamp-2 text-sm font-bold text-slate-800 transition-colors">
-                        <a href="{{ route('home') }}">{{ $artikel->judul }}</a>
+                        <a href="{{ route('posts.show', ['tipe' => $artikel->tipe, 'slug' => $artikel->slug]) }}">{{ $artikel->judul }}</a>
                       </h3>
                     </div>
                     <p class="mt-1 text-[11px] text-slate-400">{{ $artikel->published_at?->diffForHumans() ?? '' }}
@@ -223,7 +223,7 @@
           <!-- TAB CONTENT: TERBARU -->
           <div x-show="tab === 'terbaru'" x-cloak class="space-y-4">
             @forelse($terbaru as $item)
-              <a href="{{ route('home') }}"
+              <a href="{{ route('posts.show', ['tipe' => $item->tipe, 'slug' => $item->slug]) }}"
                 class="group flex items-start gap-3 border-b border-slate-100 pb-3 last:border-0 last:pb-0">
                 <img class="h-16 w-20 shrink-0 rounded-lg object-contain"
                   src="{{ asset('storage/' . $item->thumbnail) }}" alt="" />
@@ -247,7 +247,7 @@
           <!-- TAB CONTENT: TERPOPULER -->
           <div x-show="tab === 'terpopuler'" x-cloak class="space-y-4">
             @forelse($terpopuler as $item)
-              <a href="{{ route('home') }}"
+              <a href="{{ route('posts.show', ['tipe' => $item->tipe, 'slug' => $item->slug]) }}"
                 class="group flex items-start gap-3 border-b border-slate-100 pb-3 last:border-0 last:pb-0">
                 <img class="h-16 w-20 shrink-0 rounded-lg object-contain"
                   src="{{ asset('storage/' . $item->thumbnail) }}" alt="" />

@@ -4,10 +4,52 @@ namespace App\Http\Controllers;
 
 use App\Models\Kategori;
 use App\Models\Post;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+    public function show(string $tipe, string $slug)
+    {
+        if (! in_array($tipe, ['berita', 'artikel'])) {
+            abort(404);
+        }
+
+        $post = Post::where('tipe', $tipe)
+            ->where('slug', $slug)
+            ->where('is_published', true)
+            ->with('kategori')
+            ->first();
+
+        if (! $post) {
+            throw new ModelNotFoundException;
+        }
+
+        $post->increment('views');
+
+        $relatedPosts = Post::where('tipe', $tipe)
+            ->where('id_kategori', $post->id_kategori)
+            ->where('id', '!=', $post->id)
+            ->where('is_published', true)
+            ->orderBy('published_at', 'desc')
+            ->limit(3)
+            ->get();
+
+        $otherPosts = Post::where('tipe', $tipe)
+            ->where('id', '!=', $post->id)
+            ->where('is_published', true)
+            ->orderBy('published_at', 'desc')
+            ->limit(5)
+            ->get();
+
+        return view('posts.show', [
+            'post' => $post,
+            'relatedPosts' => $relatedPosts,
+            'otherPosts' => $otherPosts,
+            'tipe' => $tipe,
+        ]);
+    }
+
     public function indexBerita(Request $request)
     {
         return $this->renderIndex($request, 'berita', 'Berita Terkini', 'Informasi dan berita resmi dari Dinas Komunikasi, Informatika dan Statistik Kabupaten Bangka.');
