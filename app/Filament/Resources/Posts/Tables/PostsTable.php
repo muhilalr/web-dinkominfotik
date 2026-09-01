@@ -26,6 +26,8 @@ class PostsTable
                     ->searchable(),
                 ImageColumn::make('thumbnail')
                     ->label('Thumbnail')
+                    ->disk('public')
+                    ->visibility('public')
                     ->size(48),
                 TextColumn::make('views')
                     ->numeric()

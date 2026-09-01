@@ -40,6 +40,7 @@ class PostForm
                     ->columnSpanFull(),
                 FileUpload::make('thumbnail')
                     ->image()
+                    ->disk('public')
                     ->directory(function ($get) {
                         $tipe = $get('tipe') ?? 'berita';
 
