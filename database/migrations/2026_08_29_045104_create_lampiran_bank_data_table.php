@@ -20,9 +20,8 @@ return new class extends Migration
 
             $table->string('file_name');
             $table->string('file_path', 500);
-            $table->string('file_type', 100);
+            $table->string('file_type', 100)->nullable();
             $table->unsignedBigInteger('file_size')->nullable();
-            $table->unsignedBigInteger('download_count')->default(0);
             $table->timestamps();
         });
     }

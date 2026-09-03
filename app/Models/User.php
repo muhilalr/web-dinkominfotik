@@ -40,11 +40,6 @@ class User extends Authenticatable
         return $this->hasMany(VideoKegiatan::class, 'created_by');
     }
 
-    public function bankData()
-    {
-        return $this->hasMany(BankData::class, 'created_by');
-    }
-
     public function pengumuman()
     {
         return $this->hasMany(Pengumuman::class, 'created_by');

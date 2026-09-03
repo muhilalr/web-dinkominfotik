@@ -14,15 +14,9 @@ return new class extends Migration
         Schema::create('bank_data', function (Blueprint $table) {
             $table->id();
             $table->string('judul');
-            $table->string('slug')->unique();
             $table->text('deskripsi')->nullable();
             $table->boolean('is_published')->default(false);
-
-            $table->foreignId('created_by')
-                ->nullable()
-                ->constrained('users')
-                ->nullOnDelete();
-
+            $table->string('tahun')->nullable();
             $table->timestamps();
         });
     }

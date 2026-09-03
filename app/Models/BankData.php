@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-#[Fillable(['judul', 'slug', 'deskripsi', 'is_published', 'created_by'])]
+#[Fillable(['judul', 'deskripsi', 'is_published', 'tahun'])]
 class BankData extends Model
 {
     use HasFactory;
@@ -16,11 +16,6 @@ class BankData extends Model
         return [
             'is_published' => 'boolean',
         ];
-    }
-
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'created_by');
     }
 
     public function lampiranBankData()
