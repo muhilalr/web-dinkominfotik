@@ -13,14 +13,12 @@ return new class extends Migration
     {
         Schema::create('banners', function (Blueprint $table) {
             $table->id();
-            $table->string('judul')->nullable();
             $table->string('gambar', 500);
             $table->string('link_url', 500)->nullable();
-            $table->enum('posisi', ['hero', 'carousel'])->default('hero');
             $table->integer('sort_order')->default(0);
             $table->boolean('is_active')->default(true);
-            $table->timestamp('start_at')->nullable();
-            $table->timestamp('end_at')->nullable();
+            $table->date('start_at')->nullable();
+            $table->date('end_at')->nullable();
             $table->timestamps();
         });
     }
