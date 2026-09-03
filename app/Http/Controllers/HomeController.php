@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\BankData;
+use App\Models\Banner;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class HomeController extends Controller
 {
@@ -55,7 +57,21 @@ class HomeController extends Controller
             ->limit(3)
             ->get();
 
-        return view('welcome', compact('headline', 'beritas', 'artikels', 'terbaru', 'terpopuler', 'bankDatas'));
+        $banners = Banner::where('is_active', true)
+            ->where(function ($query) {
+                $now = Carbon::now();
+                $query->whereNull('start_at')
+                    ->orWhere('start_at', '<=', $now);
+            })
+            ->where(function ($query) {
+                $now = Carbon::now();
+                $query->whereNull('end_at')
+                    ->orWhere('end_at', '>=', $now);
+            })
+            ->orderBy('sort_order')
+            ->get();
+
+        return view('welcome', compact('headline', 'beritas', 'artikels', 'terbaru', 'terpopuler', 'bankDatas', 'banners'));
     }
 
     /**

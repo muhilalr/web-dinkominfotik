@@ -358,59 +358,74 @@
   <!-- BERITA & INFORMASI END -->
 
   <!-- CAROUSEL START -->
-  <div class="relative w-full p-6" x-data="{ current: 0, total: 3 }" x-init="setInterval(() => { current = (current + 1) % total }, 5000)">
-    <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
-      <template
-        x-for="(img, index) in [
-          '{{ asset('img/banner-1.jpg') }}',
-          '{{ asset('img/banner-2.jpg') }}',
-          '{{ asset('img/banner-3.jpg') }}'
-        ]"
-        :key="index">
-        <div x-show="current === index" x-transition:enter="transition ease-in-out duration-700"
-          x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
-          x-transition:leave="transition ease-in-out duration-700" x-transition:leave-start="opacity-100"
-          x-transition:leave-end="opacity-0" class="absolute inset-0">
-          <img :src="img" class="block h-full w-full object-cover" :alt="'Banner ' + (index + 1)" />
+  <div class="relative w-full p-6">
+    @if ($banners->isNotEmpty())
+      <div class="relative h-56 overflow-hidden rounded-lg md:h-96" x-data="{ current: 0, total: {{ $banners->count() }} }" x-init="setInterval(() => { current = (current + 1) % total }, 5000)">
+        @foreach ($banners as $banner)
+          <div x-show="current === {{ $loop->index }}" x-transition:enter="transition ease-in-out duration-700"
+            x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+            x-transition:leave="transition ease-in-out duration-700" x-transition:leave-start="opacity-100"
+            x-transition:leave-end="opacity-0" class="absolute inset-0">
+            @if ($banner->link_url)
+              <a href="{{ $banner->link_url }}">
+                <img src="{{ asset('storage/' . $banner->gambar) }}" class="block h-full w-full object-cover" alt="Banner {{ $loop->iteration }}" />
+              </a>
+            @else
+              <img src="{{ asset('storage/' . $banner->gambar) }}" class="block h-full w-full object-cover" alt="Banner {{ $loop->iteration }}" />
+            @endif
+          </div>
+        @endforeach
+
+        @if ($banners->count() > 1)
+          <!-- Slider indicators -->
+          <div class="absolute bottom-10 left-1/2 z-30 flex -translate-x-1/2 space-x-3">
+            @foreach ($banners as $banner)
+              <button type="button" @click="current = {{ $loop->index }}" :class="current === {{ $loop->index }} ? 'bg-white' : 'bg-white/50'"
+                class="h-3 w-3 rounded-full" aria-label="Slide {{ $loop->iteration }}"></button>
+            @endforeach
+          </div>
+
+          <!-- Slider controls -->
+          <button type="button"
+            class="inset-s-6 group absolute top-0 z-30 flex h-full cursor-pointer items-center justify-center px-4 focus:outline-none"
+            @click="current = (current - 1 + total) % total">
+            <span
+              class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/30 focus:ring-4 focus:ring-white group-hover:bg-white/50">
+              <svg class="h-4 w-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 6 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M5 1 1 5l4 4" />
+              </svg>
+              <span class="sr-only">Previous</span>
+            </span>
+          </button>
+          <button type="button"
+            class="inset-e-6 group absolute top-0 z-30 flex h-full cursor-pointer items-center justify-center px-4 focus:outline-none"
+            @click="current = (current + 1) % total">
+            <span
+              class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/30 focus:ring-4 focus:ring-white group-hover:bg-white/50">
+              <svg class="h-4 w-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 6 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="m1 9 4-4-4-4" />
+              </svg>
+              <span class="sr-only">Next</span>
+            </span>
+          </button>
+        @endif
+      </div>
+    @else
+      <div class="relative flex h-56 items-center justify-center overflow-hidden rounded-lg bg-slate-100 md:h-96">
+        <div class="text-center">
+          <svg class="mx-auto mb-4 h-12 w-12 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+              d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+          <p class="text-sm font-medium text-slate-400">Banner belum tersedia</p>
+          <p class="mt-1 text-xs text-slate-300">Upload banner melalui panel admin</p>
         </div>
-      </template>
-    </div>
-
-    <!-- Slider indicators -->
-    <div class="absolute bottom-10 left-1/2 z-30 flex -translate-x-1/2 space-x-3">
-      <template x-for="i in total" :key="i">
-        <button type="button" @click="current = i - 1" :class="current === i - 1 ? 'bg-white' : 'bg-white/50'"
-          class="h-3 w-3 rounded-full" :aria-label="'Slide ' + i"></button>
-      </template>
-    </div>
-
-    <!-- Slider controls -->
-    <button type="button"
-      class="inset-s-6 group absolute top-0 z-30 flex h-full cursor-pointer items-center justify-center px-4 focus:outline-none"
-      @click="current = (current - 1 + total) % total">
-      <span
-        class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/30 focus:ring-4 focus:ring-white group-hover:bg-white/50">
-        <svg class="h-4 w-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-          viewBox="0 0 6 10">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M5 1 1 5l4 4" />
-        </svg>
-        <span class="sr-only">Previous</span>
-      </span>
-    </button>
-    <button type="button"
-      class="inset-e-6 group absolute top-0 z-30 flex h-full cursor-pointer items-center justify-center px-4 focus:outline-none"
-      @click="current = (current + 1) % total">
-      <span
-        class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/30 focus:ring-4 focus:ring-white group-hover:bg-white/50">
-        <svg class="h-4 w-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-          viewBox="0 0 6 10">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="m1 9 4-4-4-4" />
-        </svg>
-        <span class="sr-only">Next</span>
-      </span>
-    </button>
+      </div>
+    @endif
   </div>
   <!-- CAROUSEL END -->
 
