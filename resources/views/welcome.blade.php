@@ -64,7 +64,8 @@
               </div>
               <h2
                 class="mb-3 text-base font-bold leading-snug transition-colors hover:text-blue-300 md:text-2xl lg:text-3xl">
-                <a href="{{ route('posts.show', ['tipe' => $headline->tipe, 'slug' => $headline->slug]) }}">{{ $headline->judul }}</a>
+                <a
+                  href="{{ route('posts.show', ['tipe' => $headline->tipe, 'slug' => $headline->slug]) }}">{{ $headline->judul }}</a>
               </h2>
               <p class="mb-4 line-clamp-2 hidden text-sm text-slate-300 md:block">
                 {!! Str::limit(strip_tags($headline->konten), 200) !!}
@@ -137,26 +138,28 @@
                       <span
                         class="mb-1 inline-block rounded bg-blue-50 px-2 py-0.5 text-[10px] font-semibold text-blue-600">{{ $berita->kategori?->nama ?? '' }}</span>
                       <h3 class="hover:text-utama line-clamp-2 text-sm font-bold text-slate-800 transition-colors">
-                        <a href="{{ route('posts.show', ['tipe' => $berita->tipe, 'slug' => $berita->slug]) }}">{{ $berita->judul }}</a>
+                        <a
+                          href="{{ route('posts.show', ['tipe' => $berita->tipe, 'slug' => $berita->slug]) }}">{{ $berita->judul }}</a>
                       </h3>
                     </div>
                     <p class="mt-1 text-[11px] text-slate-400">{{ $berita->published_at?->diffForHumans() ?? '' }}</p>
                   </div>
                 </div>
+                <div class="mt-auto border-t border-slate-100 pt-3 text-center">
+                  <a href="{{ route('posts.berita') }}"
+                    class="text-utama inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-slate-50 px-5 py-2 text-xs font-semibold transition-all hover:bg-slate-100 hover:text-blue-900">
+                    Lihat Selengkapnya Berita
+                    <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </a>
+                </div>
               @empty
-                <p class="py-4 text-center text-sm text-slate-400">Belum ada berita terkini.</p>
+                <div class="flex min-h-32 flex-1 items-center justify-center text-center">
+                  <p class="text-sm text-slate-400">Belum ada berita terkini.</p>
+                </div>
               @endforelse
-
-              <div class="mt-auto border-t border-slate-100 pt-3 text-center">
-                <a href="{{ route('posts.berita') }}"
-                  class="text-utama inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-slate-50 px-5 py-2 text-xs font-semibold transition-all hover:bg-slate-100 hover:text-blue-900">
-                  Lihat Selengkapnya Berita
-                  <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
-                </a>
-              </div>
             </div>
 
             <!-- LIST ARTIKEL -->
@@ -171,27 +174,30 @@
                       <span
                         class="mb-1 inline-block rounded bg-purple-50 px-2 py-0.5 text-[10px] font-semibold text-purple-600">{{ $artikel->kategori?->nama ?? '' }}</span>
                       <h3 class="hover:text-utama line-clamp-2 text-sm font-bold text-slate-800 transition-colors">
-                        <a href="{{ route('posts.show', ['tipe' => $artikel->tipe, 'slug' => $artikel->slug]) }}">{{ $artikel->judul }}</a>
+                        <a
+                          href="{{ route('posts.show', ['tipe' => $artikel->tipe, 'slug' => $artikel->slug]) }}">{{ $artikel->judul }}</a>
                       </h3>
                     </div>
                     <p class="mt-1 text-[11px] text-slate-400">{{ $artikel->published_at?->diffForHumans() ?? '' }}
                     </p>
                   </div>
                 </div>
+                <div class="mt-auto border-t border-slate-100 pt-3 text-center">
+                  <a href="{{ route('posts.artikel') }}"
+                    class="text-utama inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-slate-50 px-5 py-2 text-xs font-semibold transition-all hover:bg-slate-100 hover:text-blue-900">
+                    Lihat Selengkapnya Artikel
+                    <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </a>
+                </div>
               @empty
-                <p class="py-4 text-center text-sm text-slate-400">Belum ada artikel.</p>
+                <div class="flex min-h-32 flex-1 items-center justify-center text-center">
+                  <p class="text-sm text-slate-400">Belum ada artikel.</p>
+                </div>
               @endforelse
 
-              <div class="mt-auto border-t border-slate-100 pt-3 text-center">
-                <a href="{{ route('posts.artikel') }}"
-                  class="text-utama inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-slate-50 px-5 py-2 text-xs font-semibold transition-all hover:bg-slate-100 hover:text-blue-900">
-                  Lihat Selengkapnya Artikel
-                  <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
-                </a>
-              </div>
             </div>
           </div>
         </div>
@@ -221,7 +227,7 @@
           </div>
 
           <!-- TAB CONTENT: TERBARU -->
-          <div x-show="tab === 'terbaru'" x-cloak class="space-y-4">
+          <div x-show="tab === 'terbaru'" x-cloak class="flex flex-1 flex-col space-y-4">
             @forelse($terbaru as $item)
               <a href="{{ route('posts.show', ['tipe' => $item->tipe, 'slug' => $item->slug]) }}"
                 class="group flex items-start gap-3 border-b border-slate-100 pb-3 last:border-0 last:pb-0">
@@ -240,12 +246,14 @@
                 </div>
               </a>
             @empty
-              <p class="py-4 text-center text-xs text-slate-400">Belum ada informasi.</p>
+              <div class="flex flex-1 items-center justify-center text-center">
+                <p class="text-xs text-slate-400">Belum ada informasi.</p>
+              </div>
             @endforelse
           </div>
 
           <!-- TAB CONTENT: TERPOPULER -->
-          <div x-show="tab === 'terpopuler'" x-cloak class="space-y-4">
+          <div x-show="tab === 'terpopuler'" x-cloak class="flex flex-1 flex-col space-y-4">
             @forelse($terpopuler as $item)
               <a href="{{ route('posts.show', ['tipe' => $item->tipe, 'slug' => $item->slug]) }}"
                 class="group flex items-start gap-3 border-b border-slate-100 pb-3 last:border-0 last:pb-0">
@@ -264,13 +272,15 @@
                 </div>
               </a>
             @empty
-              <p class="py-4 text-center text-xs text-slate-400">Belum ada informasi populer.</p>
+              <div class="flex flex-1 items-center justify-center text-center">
+                <p class="text-xs text-slate-400">Belum ada informasi populer.</p>
+              </div>
             @endforelse
           </div>
         </div>
 
         <!-- BANK DATA SECTION START -->
-        <div class="flex-1 rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
+        <div class="flex flex-1 flex-col rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
           <div class="mb-4 flex items-center justify-between border-b border-slate-100 pb-4">
             <div class="flex items-center gap-2">
               <div class="text-utama flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50">
@@ -285,86 +295,59 @@
 
           <p class="mb-4 text-xs text-slate-500">Daftar dokumen resmi dan publikasi data Kabupaten Bangka.</p>
 
-          <div class="space-y-4">
-            <!-- Item 1 -->
-            <div
-              class="rounded-xl border border-slate-200/80 bg-slate-50 p-3.5 transition-all hover:border-blue-200 hover:bg-blue-50/30">
-              <a href="#"
-                class="hover:text-utama mb-2 line-clamp-2 block text-xs font-bold text-slate-800 transition-colors sm:text-sm">
-                Laporan Akuntabilitas Kinerja Instansi Pemerintah (LAKIP) Tahun 2023
-              </a>
-              <div class="flex items-center justify-between border-t border-slate-200/60 pt-2 text-[11px]">
-                <span class="flex items-center gap-1 text-slate-500">
-                  <svg class="h-3.5 w-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
-                  </svg>
-                  1 Lampiran (PDF)
-                </span>
-                <a href="#" class="text-utama flex items-center gap-1 font-semibold hover:underline">
-                  Unduh
-                  <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                  </svg>
+          <div class="flex flex-1 flex-col space-y-4">
+            @forelse($bankDatas as $bankData)
+              <div
+                class="rounded-xl border border-slate-200/80 bg-slate-50 p-3.5 transition-all hover:border-blue-200 hover:bg-blue-50/30">
+                @if ($bankData->tahun)
+                  <span
+                    class="mb-1 inline-block rounded bg-blue-50 px-1.5 py-0.5 text-[9px] font-semibold text-blue-600">Tahun
+                    {{ $bankData->tahun }}</span>
+                @endif
+                <a href="#"
+                  class="hover:text-utama mb-2 line-clamp-2 block text-xs font-bold text-slate-800 transition-colors sm:text-sm">
+                  {{ $bankData->judul }}
                 </a>
+                @forelse($bankData->lampiranBankData as $lampiran)
+                  <div
+                    class="mt-2 flex items-center justify-between rounded-lg border border-slate-200/60 bg-white px-3 py-2">
+                    <span class="flex items-center gap-1.5 text-[11px] text-slate-600">
+                      <svg class="h-3.5 w-3.5 shrink-0 text-slate-400" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
+                      </svg>
+                      <span class="line-clamp-1">{{ $lampiran->file_name }}</span>
+                      <span
+                        class="shrink-0 rounded bg-slate-100 px-1.5 py-0.5 text-[9px] font-semibold text-slate-500">
+                        {{ strtoupper(pathinfo($lampiran->file_name, PATHINFO_EXTENSION)) }}
+                      </span>
+                    </span>
+                    <a href="{{ route('bank-data.download', $lampiran) }}"
+                      class="text-utama flex shrink-0 items-center gap-1 text-[11px] font-semibold hover:underline">
+                      Unduh
+                      <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                      </svg>
+                    </a>
+                  </div>
+                @empty
+                  <p class="mt-1 text-[11px] italic text-slate-400">Tidak ada lampiran</p>
+                @endforelse
               </div>
-            </div>
-
-            <!-- Item 2 -->
-            <div
-              class="rounded-xl border border-slate-200/80 bg-slate-50 p-3.5 transition-all hover:border-blue-200 hover:bg-blue-50/30">
-              <a href="#"
-                class="hover:text-utama mb-2 line-clamp-2 block text-xs font-bold text-slate-800 transition-colors sm:text-sm">
-                Bangka Dalam Angka & Buku Data Statistik Sektoral Kominfo 2024
-              </a>
-              <div class="flex items-center justify-between border-t border-slate-200/60 pt-2 text-[11px]">
-                <span class="flex items-center gap-1 text-slate-500">
-                  <svg class="h-3.5 w-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
-                  </svg>
-                  2 Lampiran (PDF, XLSX)
-                </span>
-                <a href="#" class="text-utama flex items-center gap-1 font-semibold hover:underline">
-                  Unduh
-                  <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                  </svg>
-                </a>
+            @empty
+              <div class="flex flex-1 items-center justify-center text-center">
+                <p class="text-xs text-slate-400">Belum ada bank data.</p>
               </div>
-            </div>
-
-            <!-- Item 3 -->
-            <div
-              class="rounded-xl border border-slate-200/80 bg-slate-50 p-3.5 transition-all hover:border-blue-200 hover:bg-blue-50/30">
-              <a href="#"
-                class="hover:text-utama mb-2 line-clamp-2 block text-xs font-bold text-slate-800 transition-colors sm:text-sm">
-                Dokumen Rencana Strategis (Renstra) Dinkominfotik 2021-2026
-              </a>
-              <div class="flex items-center justify-between border-t border-slate-200/60 pt-2 text-[11px]">
-                <span class="flex items-center gap-1 text-slate-500">
-                  <svg class="h-3.5 w-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
-                  </svg>
-                  1 Lampiran (PDF)
-                </span>
-                <a href="#" class="text-utama flex items-center gap-1 font-semibold hover:underline">
-                  Unduh
-                  <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                  </svg>
-                </a>
-              </div>
-            </div>
+            @endforelse
           </div>
 
-          <a href="#" class="text-utama mt-5 block text-center text-xs font-bold hover:underline">
-            Lihat Semua Bank Data &rarr;
-          </a>
+          @if ($bankDatas->isNotEmpty())
+            <a href="{{ route('bank-data.index') }}" class="text-utama mt-5 block text-center text-xs font-bold hover:underline">
+              Lihat Semua Bank Data &rarr;
+            </a>
+          @endif
         </div>
         <!-- BANK DATA SECTION END -->
       </div>

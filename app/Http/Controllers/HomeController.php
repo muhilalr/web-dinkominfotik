@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BankData;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -18,9 +19,9 @@ class HomeController extends Controller
             ->latest('published_at')
             ->first()
             ?? Post::where('is_published', true)
-            ->with('kategori')
-            ->latest('published_at')
-            ->first();
+                ->with('kategori')
+                ->latest('published_at')
+                ->first();
 
         $beritas = Post::where('tipe', 'berita')
             ->where('is_published', true)
@@ -48,7 +49,13 @@ class HomeController extends Controller
             ->limit(4)
             ->get();
 
-        return view('welcome', compact('headline', 'beritas', 'artikels', 'terbaru', 'terpopuler'));
+        $bankDatas = BankData::where('is_published', true)
+            ->with('lampiranBankData')
+            ->latest()
+            ->limit(3)
+            ->get();
+
+        return view('welcome', compact('headline', 'beritas', 'artikels', 'terbaru', 'terpopuler', 'bankDatas'));
     }
 
     /**
