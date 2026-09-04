@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\BankData;
 use App\Models\Banner;
+use App\Models\GaleriFoto;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -71,7 +72,14 @@ class HomeController extends Controller
             ->orderBy('sort_order')
             ->get();
 
-        return view('welcome', compact('headline', 'beritas', 'artikels', 'terbaru', 'terpopuler', 'bankDatas', 'banners'));
+        $galeriFotos = GaleriFoto::where('is_published', true)
+            ->with('foto')
+            ->latest('event_date')
+            ->latest('created_at')
+            ->limit(3)
+            ->get();
+
+        return view('welcome', compact('headline', 'beritas', 'artikels', 'terbaru', 'terpopuler', 'bankDatas', 'banners', 'galeriFotos'));
     }
 
     /**

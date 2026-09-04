@@ -437,7 +437,7 @@
           Dokumentasi</span>
         <h2 class="mt-2 text-2xl font-bold text-slate-900 md:text-3xl">Foto-Foto Kegiatan</h2>
       </div>
-      <a href="#"
+      <a href="{{ route('galeri-foto.index') }}"
         class="text-utama hidden w-fit items-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold shadow-sm transition-all hover:text-blue-900 hover:shadow md:inline-flex">
         Lihat Semua Foto
         <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -447,74 +447,46 @@
     </div>
 
     <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
-      <!-- Foto 1 -->
-      <div
-        class="group overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm transition-all hover:shadow-md">
-        <div class="relative h-52 overflow-hidden">
-          <img class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-            src="https://asset-2.tstatic.net/bangka/foto/bank/images/Haris-tinjau-anak-stunting-di-Gunung-Muda.jpg"
-            alt="Foto Kegiatan" />
-          <div
-            class="absolute right-3 top-3 rounded-md bg-slate-900/60 px-2.5 py-1 text-xs text-white backdrop-blur-md">
-            18 Okt 2024
+      @forelse($galeriFotos as $galeri)
+        <div
+          class="group overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm transition-all hover:shadow-md">
+          <div class="relative h-52 overflow-hidden">
+            <img class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+              src="{{ $galeri->foto->first() ? asset('storage/' . $galeri->foto->first()->gambar) : 'https://placehold.co/600x400?text=No+Image' }}"
+              alt="{{ $galeri->judul }}" />
+            <div
+              class="absolute right-3 top-3 rounded-md bg-slate-900/60 px-2.5 py-1 text-xs text-white backdrop-blur-md">
+              {{ $galeri->event_date?->format('d M Y') ?? '' }}
+            </div>
+            @if ($galeri->foto->count() > 1)
+              <div
+                class="absolute bottom-3 right-3 flex items-center gap-1 rounded-md bg-slate-900/60 px-2 py-1 text-[10px] text-white backdrop-blur-md">
+                <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                {{ $galeri->foto->count() }} foto
+              </div>
+            @endif
+          </div>
+          <div class="p-5">
+            <h3 class="group-hover:text-utama mb-2 line-clamp-2 text-base font-bold text-slate-800 transition-colors">
+              <a href="{{ route('galeri-foto.show', $galeri->slug) }}">{{ $galeri->judul }}</a>
+            </h3>
           </div>
         </div>
-        <div class="p-5">
-          <h3 class="group-hover:text-utama mb-2 line-clamp-2 text-base font-bold text-slate-800 transition-colors">
-            <a href="#">Peninjauan Langsung Penanganan Stunting oleh Pj Bupati Bangka di Desa Gunung Muda</a>
-          </h3>
-          <p class="line-clamp-2 text-xs text-slate-500">
-            Kegiatan kunjungan kerja dan penyerahan bantuan secara langsung kepada keluarga penerima manfaat.
-          </p>
+      @empty
+        <div class="col-span-full flex flex-col items-center justify-center py-16 text-center">
+          <svg class="mb-4 h-12 w-12 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+              d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+          <p class="text-sm font-medium text-slate-400">Belum ada galeri foto kegiatan.</p>
         </div>
-      </div>
-
-      <!-- Foto 2 -->
-      <div
-        class="group overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm transition-all hover:shadow-md">
-        <div class="relative h-52 overflow-hidden">
-          <img class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-            src="https://asset-2.tstatic.net/bangka/foto/bank/images/20240620-Pj-Bupati-Bangka-M-Haris123.jpg"
-            alt="Foto Kegiatan" />
-          <div
-            class="absolute right-3 top-3 rounded-md bg-slate-900/60 px-2.5 py-1 text-xs text-white backdrop-blur-md">
-            15 Okt 2024
-          </div>
-        </div>
-        <div class="p-5">
-          <h3 class="group-hover:text-utama mb-2 line-clamp-2 text-base font-bold text-slate-800 transition-colors">
-            <a href="#">Rapat Koordinasi Penguatan Netralitas ASN Pemkab Bangka</a>
-          </h3>
-          <p class="line-clamp-2 text-xs text-slate-500">
-            Sosialisasi edaran netralitas ASN dan pembekalan pengawasan internal di lingkungan Pemkab Bangka.
-          </p>
-        </div>
-      </div>
-
-      <!-- Foto 3 -->
-      <div
-        class="group overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm transition-all hover:shadow-md">
-        <div class="relative h-52 overflow-hidden">
-          <img class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-            src="https://asset-2.tstatic.net/bangka/foto/bank/images/Kabid-Polhukam-Gemilang-Ardin-Hulu.jpg"
-            alt="Foto Kegiatan" />
-          <div
-            class="absolute right-3 top-3 rounded-md bg-slate-900/60 px-2.5 py-1 text-xs text-white backdrop-blur-md">
-            12 Okt 2024
-          </div>
-        </div>
-        <div class="p-5">
-          <h3 class="group-hover:text-utama mb-2 line-clamp-2 text-base font-bold text-slate-800 transition-colors">
-            <a href="#">Audensi Bersama Tokoh Masyarakat Mengenai Kebijakan Daerah</a>
-          </h3>
-          <p class="line-clamp-2 text-xs text-slate-500">
-            Diskusi terbuka dalam rangka penyampaian aspirasi masyarakat terkait program pembangunan daerah.
-          </p>
-        </div>
-      </div>
+      @endforelse
     </div>
     <div class="mt-8 flex justify-center md:hidden">
-      <a href="#"
+      <a href="{{ route('galeri-foto.index') }}"
         class="text-utama inline-flex w-fit items-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold shadow-sm transition-all hover:text-blue-900 hover:shadow">
         Lihat Semua Foto
         <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
