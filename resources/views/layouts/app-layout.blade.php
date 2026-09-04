@@ -12,5 +12,6 @@
     <x-navbar></x-navbar>
     {{ $slot }}
     <x-footer></x-footer>
+    @stack('scripts')
   </body>
 </html>
