@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-#[Fillable('judul', 'slug', 'deskripsi', 'event_date', 'is_published', 'created_by')]
+#[Fillable('judul', 'slug', 'event_date', 'is_published')]
 class GaleriFoto extends Model
 {
     use HasFactory;
@@ -17,11 +17,6 @@ class GaleriFoto extends Model
             'event_date' => 'date',
             'is_published' => 'boolean',
         ];
-    }
-
-    public function createdBy()
-    {
-        return $this->belongsTo(User::class, 'created_by');
     }
 
     public function foto()

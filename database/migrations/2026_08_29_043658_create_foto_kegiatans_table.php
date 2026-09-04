@@ -18,10 +18,7 @@ return new class extends Migration
                 ->constrained('galeri_fotos')
                 ->cascadeOnDelete();
 
-            $table->string('judul')->nullable();
-            $table->text('deskripsi')->nullable();
             $table->string('gambar', 500);
-            $table->integer('sort_order')->default(0);
             $table->timestamps();
         });
     }

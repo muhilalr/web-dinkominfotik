@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-#[Fillable(['id_galeri', 'judul', 'deskripsi', 'gambar', 'sort_order'])]
+#[Fillable(['id_galeri', 'gambar'])]
 class FotoKegiatan extends Model
 {
     use HasFactory;

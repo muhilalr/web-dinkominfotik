@@ -30,11 +30,6 @@ class User extends Authenticatable
         ];
     }
 
-    public function galeriFotos()
-    {
-        return $this->hasMany(GaleriFoto::class, 'created_by');
-    }
-
     public function videoKegiatans()
     {
         return $this->hasMany(VideoKegiatan::class, 'created_by');

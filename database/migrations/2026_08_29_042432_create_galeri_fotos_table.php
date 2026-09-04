@@ -15,15 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('judul');
             $table->string('slug')->unique();
-            $table->text('deskripsi')->nullable();
             $table->date('event_date')->nullable();
             $table->boolean('is_published')->default(false);
-
-            $table->foreignId('created_by')
-                ->nullable()
-                ->constrained('users')
-                ->nullOnDelete();
-
             $table->timestamps();
         });
     }
