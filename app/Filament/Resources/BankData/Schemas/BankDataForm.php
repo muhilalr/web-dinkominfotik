@@ -32,10 +32,9 @@ class BankDataForm
                             ->disk('public')
                             ->directory('bank-data')
                             ->required()
-                            ->columnSpanFull()
                             ->storeFileNamesIn('file_name'),
                     ])
-                    ->columns(2)
+                    ->grid(2)
                     ->columnSpanFull(),
             ]);
     }

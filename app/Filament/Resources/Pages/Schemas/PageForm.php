@@ -17,7 +17,7 @@ class PageForm
                 TextInput::make('judul')
                     ->required()
                     ->live(onBlur: true)
-                    ->afterStateUpdated(fn($state, callable $set) => $set('slug', Str::slug($state))),
+                    ->afterStateUpdated(fn ($state, callable $set) => $set('slug', Str::slug($state))),
 
                 TextInput::make('slug')
                     ->required()
