@@ -6,6 +6,7 @@ use App\Models\BankData;
 use App\Models\Banner;
 use App\Models\GaleriFoto;
 use App\Models\Post;
+use App\Models\VideoKegiatan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
@@ -79,7 +80,12 @@ class HomeController extends Controller
             ->limit(3)
             ->get();
 
-        return view('welcome', compact('headline', 'beritas', 'artikels', 'terbaru', 'terpopuler', 'bankDatas', 'banners', 'galeriFotos'));
+        $videoKegiatans = VideoKegiatan::where('is_published', true)
+            ->latest('created_at')
+            ->limit(3)
+            ->get();
+
+        return view('welcome', compact('headline', 'beritas', 'artikels', 'terbaru', 'terpopuler', 'bankDatas', 'banners', 'galeriFotos', 'videoKegiatans'));
     }
 
     /**

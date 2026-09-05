@@ -505,7 +505,7 @@
           Multimedia</span>
         <h2 class="mt-2 text-2xl font-bold text-slate-900 md:text-3xl">Video Publikasi</h2>
       </div>
-      <a href="#"
+      <a href="{{ route('video-kegiatan.index') }}"
         class="text-utama hidden w-fit items-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold shadow-sm transition-all hover:text-blue-900 hover:shadow md:inline-flex">
         Lihat Semua Video
         <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -515,98 +515,50 @@
     </div>
 
     <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
-      <!-- Video 1 -->
-      <div
-        class="group overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm transition-all hover:shadow-md">
-        <div class="relative h-52 overflow-hidden bg-slate-900">
-          <img class="h-full w-full object-cover opacity-80 transition-transform duration-500 group-hover:scale-105"
-            src="https://asset-2.tstatic.net/bangka/foto/bank/images/20240620-Pj-Bupati-Bangka-M-Haris123.jpg"
-            alt="Video Thumbnail" />
-          <div class="absolute inset-0 flex items-center justify-center">
+      @forelse($videoKegiatans as $video)
+        <div
+          class="group overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm transition-all hover:shadow-md">
+          <div class="relative h-52 overflow-hidden bg-slate-900">
+            <img class="h-full w-full object-cover opacity-80 transition-transform duration-500 group-hover:scale-105"
+              src="{{ $video->youtube_thumbnail_url }}"
+              alt="{{ $video->judul }}" />
+            <a href="{{ route('video-kegiatan.show', $video->slug) }}"
+              class="absolute inset-0 flex items-center justify-center">
+              <div
+                class="bg-utama/90 flex h-12 w-12 items-center justify-center rounded-full text-white shadow-lg transition-transform group-hover:scale-110">
+                <svg class="ml-0.5 h-6 w-6 fill-current" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </div>
+            </a>
             <div
-              class="bg-utama/90 flex h-12 w-12 items-center justify-center rounded-full text-white shadow-lg transition-transform group-hover:scale-110">
-              <svg class="ml-0.5 h-6 w-6 fill-current" viewBox="0 0 24 24">
-                <path d="M8 5v14l11-7z" />
-              </svg>
+              class="absolute bottom-3 right-3 rounded bg-slate-950/80 px-2 py-0.5 text-[10px] font-medium text-white">
+              {{ $video->created_at->translatedFormat('d M Y') }}
             </div>
           </div>
-          <div
-            class="absolute bottom-3 right-3 rounded bg-slate-950/80 px-2 py-0.5 text-[10px] font-medium text-white">
-            03:45
+          <div class="p-5">
+            <h3 class="group-hover:text-utama mb-2 line-clamp-2 text-base font-bold text-slate-800 transition-colors">
+              <a href="{{ route('video-kegiatan.show', $video->slug) }}">{{ $video->judul }}</a>
+            </h3>
+            @if ($video->deskripsi)
+              <p class="line-clamp-2 text-xs text-slate-500">
+                {{ $video->deskripsi }}
+              </p>
+            @endif
           </div>
         </div>
-        <div class="p-5">
-          <h3 class="group-hover:text-utama mb-2 line-clamp-2 text-base font-bold text-slate-800 transition-colors">
-            <a href="#">Profil Pelayanan Informasi Publik Dinkominfotik Bangka 2024</a>
-          </h3>
-          <p class="line-clamp-2 text-xs text-slate-500">
-            Video singkat komitmen dan berbagai inovasi layanan informasi publik di Kabupaten Bangka.
-          </p>
+      @empty
+        <div class="col-span-full flex flex-col items-center justify-center py-16 text-center">
+          <svg class="mb-4 h-12 w-12 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+              d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+          </svg>
+          <p class="text-sm font-medium text-slate-400">Belum ada video kegiatan.</p>
         </div>
-      </div>
-
-      <!-- Video 2 -->
-      <div
-        class="group overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm transition-all hover:shadow-md">
-        <div class="relative h-52 overflow-hidden bg-slate-900">
-          <img class="h-full w-full object-cover opacity-80 transition-transform duration-500 group-hover:scale-105"
-            src="https://asset-2.tstatic.net/bangka/foto/bank/images/Haris-tinjau-anak-stunting-di-Gunung-Muda.jpg"
-            alt="Video Thumbnail" />
-          <div class="absolute inset-0 flex items-center justify-center">
-            <div
-              class="bg-utama/90 flex h-12 w-12 items-center justify-center rounded-full text-white shadow-lg transition-transform group-hover:scale-110">
-              <svg class="ml-0.5 h-6 w-6 fill-current" viewBox="0 0 24 24">
-                <path d="M8 5v14l11-7z" />
-              </svg>
-            </div>
-          </div>
-          <div
-            class="absolute bottom-3 right-3 rounded bg-slate-950/80 px-2 py-0.5 text-[10px] font-medium text-white">
-            05:20
-          </div>
-        </div>
-        <div class="p-5">
-          <h3 class="group-hover:text-utama mb-2 line-clamp-2 text-base font-bold text-slate-800 transition-colors">
-            <a href="#">Dokumentasi Program Penurunan Stunting Terpadu Kabupaten Bangka</a>
-          </h3>
-          <p class="line-clamp-2 text-xs text-slate-500">
-            Liputan khusus aksi konvergensi pencegahan stunting oleh tim gabungan Pemkab Bangka.
-          </p>
-        </div>
-      </div>
-
-      <!-- Video 3 -->
-      <div
-        class="group overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm transition-all hover:shadow-md">
-        <div class="relative h-52 overflow-hidden bg-slate-900">
-          <img class="h-full w-full object-cover opacity-80 transition-transform duration-500 group-hover:scale-105"
-            src="https://asset-2.tstatic.net/bangka/foto/bank/images/Kabid-Polhukam-Gemilang-Ardin-Hulu.jpg"
-            alt="Video Thumbnail" />
-          <div class="absolute inset-0 flex items-center justify-center">
-            <div
-              class="bg-utama/90 flex h-12 w-12 items-center justify-center rounded-full text-white shadow-lg transition-transform group-hover:scale-110">
-              <svg class="ml-0.5 h-6 w-6 fill-current" viewBox="0 0 24 24">
-                <path d="M8 5v14l11-7z" />
-              </svg>
-            </div>
-          </div>
-          <div
-            class="absolute bottom-3 right-3 rounded bg-slate-950/80 px-2 py-0.5 text-[10px] font-medium text-white">
-            02:15
-          </div>
-        </div>
-        <div class="p-5">
-          <h3 class="group-hover:text-utama mb-2 line-clamp-2 text-base font-bold text-slate-800 transition-colors">
-            <a href="#">Tutorial Penggunaan Layanan Dulang Emas Dinkominfotik</a>
-          </h3>
-          <p class="line-clamp-2 text-xs text-slate-500">
-            Panduan penggunaan portal Dulang Emas untuk masyarakat Kabupaten Bangka.
-          </p>
-        </div>
-      </div>
+      @endforelse
     </div>
     <div class="mt-8 flex justify-center md:hidden">
-      <a href="#"
+      <a href="{{ route('video-kegiatan.index') }}"
         class="text-utama inline-flex w-fit items-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold shadow-sm transition-all hover:text-blue-900 hover:shadow">
         Lihat Semua Video
         <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
