@@ -18,16 +18,7 @@ return new class extends Migration
             $table->text('deskripsi')->nullable();
             $table->string('thumbnail', 500)->nullable();
             $table->string('video_url', 500);
-            $table->string('durasi', 20)->nullable();
-            $table->unsignedBigInteger('views')->default(0);
             $table->boolean('is_published')->default(false);
-            $table->timestamp('published_at')->nullable();
-
-            $table->foreignId('created_by')
-                ->nullable()
-                ->constrained('users')
-                ->nullOnDelete();
-
             $table->timestamps();
         });
     }

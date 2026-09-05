@@ -12,11 +12,7 @@ use Illuminate\Database\Eloquent\Model;
     'deskripsi',
     'thumbnail',
     'video_url',
-    'durasi',
-    'views',
     'is_published',
-    'published_at',
-    'created_by'
 ])]
 class VideoKegiatan extends Model
 {
@@ -26,12 +22,35 @@ class VideoKegiatan extends Model
     {
         return [
             'is_published' => 'boolean',
-            'published_at' => 'datetime',
         ];
     }
 
-    public function creator()
+    public function getYoutubeIdAttribute(): ?string
     {
-        return $this->belongsTo(User::class, 'created_by');
+        $url = $this->video_url;
+
+        if (preg_match('/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/', $url, $matches)) {
+            return $matches[1];
+        }
+
+        return null;
+    }
+
+    public function getYoutubeEmbedUrlAttribute(): ?string
+    {
+        $id = $this->youtube_id;
+
+        return $id ? "https://www.youtube.com/embed/{$id}" : null;
+    }
+
+    public function getYoutubeThumbnailUrlAttribute(): string
+    {
+        if ($this->thumbnail) {
+            return asset('storage/'.$this->thumbnail);
+        }
+
+        $id = $this->youtube_id;
+
+        return $id ? "https://img.youtube.com/vi/{$id}/hqdefault.jpg" : asset('img/default-video.jpg');
     }
 }
