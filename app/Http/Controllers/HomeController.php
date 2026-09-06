@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BankData;
 use App\Models\Banner;
 use App\Models\GaleriFoto;
+use App\Models\Pengumuman;
 use App\Models\Post;
 use App\Models\VideoKegiatan;
 use Illuminate\Http\Request;
@@ -85,7 +86,12 @@ class HomeController extends Controller
             ->limit(3)
             ->get();
 
-        return view('welcome', compact('headline', 'beritas', 'artikels', 'terbaru', 'terpopuler', 'bankDatas', 'banners', 'galeriFotos', 'videoKegiatans'));
+        $pengumuman = Pengumuman::where('is_published', true)
+            ->latest('published_at')
+            ->latest('created_at')
+            ->first();
+
+        return view('welcome', compact('headline', 'beritas', 'artikels', 'terbaru', 'terpopuler', 'bankDatas', 'banners', 'galeriFotos', 'videoKegiatans', 'pengumuman'));
     }
 
     /**

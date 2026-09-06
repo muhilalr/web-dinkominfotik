@@ -344,7 +344,8 @@
           </div>
 
           @if ($bankDatas->isNotEmpty())
-            <a href="{{ route('bank-data.index') }}" class="text-utama mt-5 block text-center text-xs font-bold hover:underline">
+            <a href="{{ route('bank-data.index') }}"
+              class="text-utama mt-5 block text-center text-xs font-bold hover:underline">
               Lihat Semua Bank Data &rarr;
             </a>
           @endif
@@ -368,10 +369,12 @@
             x-transition:leave-end="opacity-0" class="absolute inset-0">
             @if ($banner->link_url)
               <a href="{{ $banner->link_url }}">
-                <img src="{{ asset('storage/' . $banner->gambar) }}" class="block h-full w-full object-cover" alt="Banner {{ $loop->iteration }}" />
+                <img src="{{ asset('storage/' . $banner->gambar) }}" class="block h-full w-full object-cover"
+                  alt="Banner {{ $loop->iteration }}" />
               </a>
             @else
-              <img src="{{ asset('storage/' . $banner->gambar) }}" class="block h-full w-full object-cover" alt="Banner {{ $loop->iteration }}" />
+              <img src="{{ asset('storage/' . $banner->gambar) }}" class="block h-full w-full object-cover"
+                alt="Banner {{ $loop->iteration }}" />
             @endif
           </div>
         @endforeach
@@ -380,8 +383,9 @@
           <!-- Slider indicators -->
           <div class="absolute bottom-10 left-1/2 z-30 flex -translate-x-1/2 space-x-3">
             @foreach ($banners as $banner)
-              <button type="button" @click="current = {{ $loop->index }}" :class="current === {{ $loop->index }} ? 'bg-white' : 'bg-white/50'"
-                class="h-3 w-3 rounded-full" aria-label="Slide {{ $loop->iteration }}"></button>
+              <button type="button" @click="current = {{ $loop->index }}"
+                :class="current === {{ $loop->index }} ? 'bg-white' : 'bg-white/50'" class="h-3 w-3 rounded-full"
+                aria-label="Slide {{ $loop->iteration }}"></button>
             @endforeach
           </div>
 
@@ -417,7 +421,8 @@
     @else
       <div class="relative flex h-56 items-center justify-center overflow-hidden rounded-lg bg-slate-100 md:h-96">
         <div class="text-center">
-          <svg class="mx-auto mb-4 h-12 w-12 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="mx-auto mb-4 h-12 w-12 text-slate-300" fill="none" stroke="currentColor"
+            viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
               d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
           </svg>
@@ -520,8 +525,7 @@
           class="group overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm transition-all hover:shadow-md">
           <div class="relative h-52 overflow-hidden bg-slate-900">
             <img class="h-full w-full object-cover opacity-80 transition-transform duration-500 group-hover:scale-105"
-              src="{{ $video->youtube_thumbnail_url }}"
-              alt="{{ $video->judul }}" />
+              src="{{ $video->youtube_thumbnail_url }}" alt="{{ $video->judul }}" />
             <a href="{{ route('video-kegiatan.show', $video->slug) }}"
               class="absolute inset-0 flex items-center justify-center">
               <div
@@ -570,30 +574,74 @@
   <!-- VIDEO PUBLIKASI END -->
 
   <!-- PENGUMUMAN DAN LINK TERKAIT START -->
-  <div class="container mx-auto flex flex-col gap-5 p-5 md:flex-row">
-    <div class="flex-1 rounded-lg bg-white p-6 shadow-md">
-      <h2 class="mb-5 border-b-2 border-blue-500 pb-3 text-xl font-bold uppercase tracking-wide text-gray-800">
-        Pengumuman
-      </h2>
-      <div class="announcement mb-5">
-        <img class="mb-3 w-full rounded-lg object-cover shadow-md" src="{{ asset('img/banner-1.jpg') }}"
-          alt="Gambar Pengumuman" />
-        <h3 class="mb-3 text-2xl font-bold text-blue-500">
-          Sosialisasi Program Perlindungan Jaminan Sosial
-        </h3>
-        <p class="mb-2 text-sm text-gray-500">18/10/2024 | Dinkominfotik</p>
-        <p class="text-base text-gray-700">
-          Sosialisasi ini bertujuan untuk memberikan pemahaman mengenai pentingnya perlindungan jaminan sosial bagi
-          masyarakat. Acara ini dihadiri oleh berbagai lapisan masyarakat dan narasumber dari lembaga terkait.
-        </p>
+  <div class="container mx-auto flex flex-col gap-5 p-5 md:flex-row" x-data="{ linkHeight: 'auto' }" x-init="$nextTick(() => { linkHeight = $refs.pengumumanSection.offsetHeight + 'px' })">
+    <div class="flex-1 rounded-lg bg-white p-6 shadow-md" x-ref="pengumumanSection">
+      <div class="mb-5 flex items-center justify-between border-b-2 border-blue-500 pb-3">
+        <h2 class="text-xl font-bold uppercase tracking-wide text-gray-800">
+          Pengumuman
+        </h2>
+        @if ($pengumuman)
+          <a href="{{ route('pengumuman.index') }}"
+            class="bg-utama rounded-lg px-5 py-2.5 text-xs font-bold text-white transition-colors hover:bg-blue-950">
+            Lihat Semua Pengumuman &rarr;
+          </a>
+        @endif
+      </div>
+      <div class="announcement mb-2">
+        @if ($pengumuman)
+          <div>
+            @if ($pengumuman->gambar)
+              <img class="mb-3 h-80 w-full rounded-lg object-contain shadow-md"
+                src="{{ asset('storage/' . $pengumuman->gambar) }}" alt="{{ $pengumuman->judul }}" />
+            @endif
+            <h3 class="mb-3 text-lg font-bold text-blue-500">
+              {{ $pengumuman->judul }}
+            </h3>
+            <p class="mb-2 text-sm text-gray-500">
+              {{ $pengumuman->published_at?->format('d/m/Y') ?? '' }} | Dinkominfotik
+            </p>
+            <p class="text-sm text-gray-700">
+              {!! Str::limit(strip_tags($pengumuman->konten), 200) !!}
+            </p>
+            <a href="{{ route('pengumuman.show', $pengumuman->slug) }}"
+              class="text-utama mt-3 inline-block text-xs font-bold hover:underline">
+              Lihat Selengkapnya &rarr;
+            </a>
+          </div>
+        @else
+          <div class="flex flex-col items-center justify-center py-8 text-center">
+            <svg class="mb-3 h-10 w-10 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
+            </svg>
+            <p class="text-sm text-slate-400">Belum ada pengumuman.</p>
+          </div>
+        @endif
       </div>
     </div>
 
-    <div class="rounded-lg bg-white p-6 shadow-md md:w-1/3">
+    <div class="flex flex-col overflow-hidden rounded-lg bg-white p-6 shadow-md md:w-1/3"
+      :style="'max-height:' + linkHeight">
       <h2 class="mb-5 border-b-2 border-blue-500 pb-3 text-xl font-bold uppercase tracking-wide text-gray-800">
         Link Terkait
       </h2>
-      <div class="flex flex-col gap-4">
+      <div class="flex flex-1 flex-col gap-4 overflow-y-auto">
+        <div
+          class="transform rounded-lg border border-gray-300 bg-white p-4 shadow-sm transition-transform hover:-translate-y-1 hover:shadow-lg">
+          <a href="http://sidikjari.bangka.go.id">
+            <img class="w-full rounded-lg"
+              src="https://dinkominfotik.bangka.go.id/sites/default/files/link/xfinger_0.png.pagespeed.ic.0yU9yIn3fa.webp"
+              alt="Sidik Jari" />
+          </a>
+        </div>
+        <div
+          class="transform rounded-lg border border-gray-300 bg-white p-4 shadow-sm transition-transform hover:-translate-y-1 hover:shadow-lg">
+          <a href="http://sidikjari.bangka.go.id">
+            <img class="w-full rounded-lg"
+              src="https://dinkominfotik.bangka.go.id/sites/default/files/link/xfinger_0.png.pagespeed.ic.0yU9yIn3fa.webp"
+              alt="Sidik Jari" />
+          </a>
+        </div>
         <div
           class="transform rounded-lg border border-gray-300 bg-white p-4 shadow-sm transition-transform hover:-translate-y-1 hover:shadow-lg">
           <a href="http://sidikjari.bangka.go.id">
