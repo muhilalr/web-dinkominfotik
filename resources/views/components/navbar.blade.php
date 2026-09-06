@@ -1,5 +1,5 @@
 <!-- HEADER START -->
-<header class="z-9999 fixed left-0 top-0 w-full transition-colors duration-300" x-data="{
+<header class="z-999 fixed left-0 top-0 w-full transition-colors duration-300" x-data="{
     mobileOpen: false,
     hovered: false,
     scrolled: false,
@@ -23,15 +23,17 @@
       </a>
 
       <div class="flex items-center">
-        <button @click="mobileOpen = !mobileOpen" type="button"
-          class="flex h-10 w-10 flex-col items-center justify-center lg:hidden">
-          <span :class="mobileOpen ? 'rotate-45 translate-y-1.25' : ''"
-            class="block h-[1.5px] w-5 origin-center bg-white transition-all duration-300"></span>
-          <span :class="mobileOpen ? 'scale-0 opacity-0' : ''"
-            class="my-1 block h-[1.5px] w-5 bg-white transition-all duration-200"></span>
-          <span :class="mobileOpen ? '-rotate-45 -translate-y-1.25' : ''"
-            class="block h-[1.5px] w-5 origin-center bg-white transition-all duration-300"></span>
-        </button>
+        @if ($menus->count())
+          <button @click="mobileOpen = !mobileOpen" type="button"
+            class="flex h-10 w-10 flex-col items-center justify-center lg:hidden">
+            <span :class="mobileOpen ? 'rotate-45 translate-y-1.25' : ''"
+              class="block h-[1.5px] w-5 origin-center bg-white transition-all duration-300"></span>
+            <span :class="mobileOpen ? 'scale-0 opacity-0' : ''"
+              class="my-1 block h-[1.5px] w-5 bg-white transition-all duration-200"></span>
+            <span :class="mobileOpen ? '-rotate-45 -translate-y-1.25' : ''"
+              class="block h-[1.5px] w-5 origin-center bg-white transition-all duration-300"></span>
+          </button>
+        @endif
 
         <!-- MOBILE NAV -->
         <nav x-show="mobileOpen" x-transition:enter="transition ease-out duration-200"
