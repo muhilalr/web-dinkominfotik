@@ -4,6 +4,7 @@ use App\Http\Controllers\BankDataController;
 use App\Http\Controllers\GaleriFotoController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\PengumumanController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\VideoKegiatanController;
 use App\Models\LampiranBankData;
@@ -26,6 +27,9 @@ Route::get('/galeri-foto/{slug}', [GaleriFotoController::class, 'show'])->name('
 
 Route::get('/video-kegiatan', [VideoKegiatanController::class, 'index'])->name('video-kegiatan.index');
 Route::get('/video-kegiatan/{slug}', [VideoKegiatanController::class, 'show'])->name('video-kegiatan.show');
+
+Route::get('/pengumuman', [PengumumanController::class, 'index'])->name('pengumuman.index');
+Route::get('/pengumuman/{slug}', [PengumumanController::class, 'show'])->name('pengumuman.show');
 
 Route::get('/bank-data/{lampiran}/download', function (LampiranBankData $lampiran) {
     $disk = Storage::disk('public');
