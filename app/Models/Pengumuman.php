@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-#[Fillable(['judul', 'slug', 'gambar', 'konten', 'published_at', 'is_published', 'created_by'])]
+#[Fillable(['judul', 'slug', 'gambar', 'konten', 'published_at', 'is_published'])]
 class Pengumuman extends Model
 {
     use HasFactory;
@@ -19,10 +19,5 @@ class Pengumuman extends Model
             'published_at' => 'datetime',
             'is_published' => 'boolean',
         ];
-    }
-
-    public function creator()
-    {
-        return $this->belongsTo(User::class, 'created_by');
     }
 }

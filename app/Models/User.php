@@ -29,9 +29,4 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-
-    public function pengumuman()
-    {
-        return $this->hasMany(Pengumuman::class, 'created_by');
-    }
 }

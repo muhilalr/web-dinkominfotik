@@ -19,12 +19,6 @@ return new class extends Migration
             $table->longText('konten');
             $table->timestamp('published_at')->nullable();
             $table->boolean('is_published')->default(false);
-
-            $table->foreignId('created_by')
-                ->nullable()
-                ->constrained('users')
-                ->nullOnDelete();
-
             $table->timestamps();
         });
     }
