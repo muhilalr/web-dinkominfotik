@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BankData;
 use App\Models\Banner;
 use App\Models\GaleriFoto;
+use App\Models\LinkEksternal;
 use App\Models\Pengumuman;
 use App\Models\Post;
 use App\Models\VideoKegiatan;
@@ -24,9 +25,9 @@ class HomeController extends Controller
             ->latest('published_at')
             ->first()
             ?? Post::where('is_published', true)
-                ->with('kategori')
-                ->latest('published_at')
-                ->first();
+            ->with('kategori')
+            ->latest('published_at')
+            ->first();
 
         $beritas = Post::where('tipe', 'berita')
             ->where('is_published', true)
@@ -91,7 +92,17 @@ class HomeController extends Controller
             ->latest('created_at')
             ->first();
 
-        return view('welcome', compact('headline', 'beritas', 'artikels', 'terbaru', 'terpopuler', 'bankDatas', 'banners', 'galeriFotos', 'videoKegiatans', 'pengumuman'));
+        $linkLayanan = LinkEksternal::where('tipe', 'layanan')
+            ->where('is_active', true)
+            ->orderBy('judul')
+            ->get();
+
+        $linkPemda = LinkEksternal::where('tipe', 'pemerintah')
+            ->where('is_active', true)
+            ->orderBy('created_at', 'asc')
+            ->get();
+
+        return view('welcome', compact('headline', 'beritas', 'artikels', 'terbaru', 'terpopuler', 'bankDatas', 'banners', 'galeriFotos', 'videoKegiatans', 'pengumuman', 'linkLayanan', 'linkPemda'));
     }
 
     /**

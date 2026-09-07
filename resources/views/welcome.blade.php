@@ -576,13 +576,13 @@
   <!-- PENGUMUMAN DAN LINK TERKAIT START -->
   <div class="container mx-auto flex flex-col gap-5 p-5 md:flex-row" x-data="{ linkHeight: 'auto' }" x-init="$nextTick(() => { linkHeight = $refs.pengumumanSection.offsetHeight + 'px' })">
     <div class="flex-1 rounded-lg bg-white p-6 shadow-md" x-ref="pengumumanSection">
-      <div class="mb-5 flex items-center justify-between border-b-2 border-blue-500 pb-3">
+      <div class="mb-5 flex flex-col items-center justify-between gap-3 border-b-2 border-blue-500 pb-3 md:flex-row">
         <h2 class="text-xl font-bold uppercase tracking-wide text-gray-800">
           Pengumuman
         </h2>
         @if ($pengumuman)
           <a href="{{ route('pengumuman.index') }}"
-            class="bg-utama rounded-lg px-5 py-2.5 text-xs font-bold text-white transition-colors hover:bg-blue-950">
+            class="bg-utama inline-flex w-fit items-center rounded-lg px-4 py-2 text-xs font-bold text-white transition-colors hover:bg-blue-950 sm:px-5 sm:py-2.5">
             Lihat Semua Pengumuman &rarr;
           </a>
         @endif
@@ -625,71 +625,23 @@
       <h2 class="mb-5 border-b-2 border-blue-500 pb-3 text-xl font-bold uppercase tracking-wide text-gray-800">
         Link Terkait
       </h2>
-      <div class="flex flex-1 flex-col gap-4 overflow-y-auto">
-        <div
-          class="transform rounded-lg border border-gray-300 bg-white p-4 shadow-sm transition-transform hover:-translate-y-1 hover:shadow-lg">
-          <a href="http://sidikjari.bangka.go.id">
-            <img class="w-full rounded-lg"
-              src="https://dinkominfotik.bangka.go.id/sites/default/files/link/xfinger_0.png.pagespeed.ic.0yU9yIn3fa.webp"
-              alt="Sidik Jari" />
+      <div class="flex flex-1 flex-col gap-3 overflow-y-auto">
+        @forelse($linkLayanan as $link)
+          <a href="{{ $link->url }}" target="_blank" rel="noopener noreferrer"
+            class="shadow-xs group flex items-center gap-3.5 rounded-xl border border-slate-200 bg-slate-50/50 p-3 transition-all duration-200 hover:-translate-y-0.5 hover:border-blue-300 hover:bg-blue-50/40 hover:shadow-md">
+            @if ($link->gambar)
+              <img class="h-12 w-12 shrink-0 rounded-lg border border-slate-100 bg-white object-contain p-1"
+                src="{{ asset('storage/' . $link->gambar) }}" alt="{{ $link->judul }}" />
+            @endif
+            <span class="group-hover:text-utama text-xs font-semibold text-slate-800 transition-colors sm:text-sm">
+              {{ $link->judul }}
+            </span>
           </a>
-        </div>
-        <div
-          class="transform rounded-lg border border-gray-300 bg-white p-4 shadow-sm transition-transform hover:-translate-y-1 hover:shadow-lg">
-          <a href="http://sidikjari.bangka.go.id">
-            <img class="w-full rounded-lg"
-              src="https://dinkominfotik.bangka.go.id/sites/default/files/link/xfinger_0.png.pagespeed.ic.0yU9yIn3fa.webp"
-              alt="Sidik Jari" />
-          </a>
-        </div>
-        <div
-          class="transform rounded-lg border border-gray-300 bg-white p-4 shadow-sm transition-transform hover:-translate-y-1 hover:shadow-lg">
-          <a href="http://sidikjari.bangka.go.id">
-            <img class="w-full rounded-lg"
-              src="https://dinkominfotik.bangka.go.id/sites/default/files/link/xfinger_0.png.pagespeed.ic.0yU9yIn3fa.webp"
-              alt="Sidik Jari" />
-          </a>
-        </div>
-        <div
-          class="transform rounded-lg border border-gray-300 bg-white p-4 shadow-sm transition-transform hover:-translate-y-1 hover:shadow-lg">
-          <a href="http://bangka.go.id">
-            <img class="w-full rounded-lg"
-              src="https://dinkominfotik.bangka.go.id/sites/default/files/link/xWEB,P20BANGKA.png.pagespeed.ic.k8iB-kBOsS.webp"
-              alt="Bangka" />
-          </a>
-        </div>
-        <div
-          class="transform rounded-lg border border-gray-300 bg-white p-4 shadow-sm transition-transform hover:-translate-y-1 hover:shadow-lg">
-          <a href="https://satudata.bangka.go.id">
-            <img class="w-full rounded-lg"
-              src="https://dinkominfotik.bangka.go.id/sites/default/files/link/xSATU,P20DATA_0.png.pagespeed.ic.skSGNnc9YX.webp"
-              alt="Satu Data" />
-          </a>
-        </div>
-        <div
-          class="transform rounded-lg border border-gray-300 bg-white p-4 shadow-sm transition-transform hover:-translate-y-1 hover:shadow-lg">
-          <a href="https://www.lapor.go.id/">
-            <img class="w-full rounded-lg"
-              src="https://dinkominfotik.bangka.go.id/sites/default/files/link/xLAPOR.png.pagespeed.ic.kNG7j29pcW.webp"
-              alt="Lapor" />
-          </a>
-        </div>
-        <div
-          class="transform rounded-lg border border-gray-300 bg-white p-4 shadow-sm transition-transform hover:-translate-y-1 hover:shadow-lg">
-          <a href="https://lpse.bangka.go.id/eproc4">
-            <img class="w-full rounded-lg"
-              src="https://dinkominfotik.bangka.go.id/sites/default/files/link/xLPSE1.png.pagespeed.ic.TfyZEWL04s.webp"
-              alt="LPSE" />
-          </a>
-        </div>
-        <div
-          class="transform rounded-lg border border-gray-300 bg-white p-4 shadow-sm transition-transform hover:-translate-y-1 hover:shadow-lg">
-          <a href="https://pesonadukcapil.bangka.go.id/">
-            <img class="w-full rounded-lg"
-              src="https://dinkominfotik.bangka.go.id/sites/default/files/link/xPESONA,P20DUKCPIL..jpg.pagespeed.ic.0EPVyK3fnf.webp"
-              alt="Pesona Dukcapil" />
-          </a>
-        </div>
+        @empty
+          <div class="flex flex-1 items-center justify-center py-4">
+            <p class="text-xs text-slate-400">Belum ada link terkait.</p>
+          </div>
+        @endforelse
       </div>
     </div>
   </div>
@@ -700,52 +652,54 @@
     <div class="bg-utama rounded-t-lg p-4 px-8">
       <h1 class="text-xl font-bold text-white">Link Pemda Lainnya</h1>
     </div>
-    <div
-      class="flex flex-col items-center justify-center gap-5 rounded-b-lg bg-white py-5 md:flex-row md:gap-5 md:px-8">
-      <div class="flex w-full items-center justify-evenly md:w-auto md:justify-center md:gap-5">
-        <a href="https://babelprov.go.id/"
-          class="flex flex-col items-center justify-center gap-3 rounded-md border border-gray-300 bg-slate-50 p-4 shadow-sm duration-300 hover:-translate-y-1 hover:shadow-lg">
-          <img src="{{ asset('img/prov_babel.png') }}" alt="Provinsi Kepulauan Bangka Belitung" width="120" />
-          <p class="text-center text-xs font-semibold">Provinsi Kepulauan<br />Bangka Belitung</p>
-        </a>
-        <a href="https://pangkalpinangkota.go.id/"
-          class="flex flex-col items-center justify-center gap-3 rounded-md border border-gray-300 bg-slate-50 p-4 shadow-sm duration-300 hover:-translate-y-1 hover:shadow-lg">
-          <img src="{{ asset('img/kota_pangkalpinang.png') }}" alt="Kota Pangkalpinang" width="120" />
-          <p class="text-center text-xs font-semibold">Kota<br />Pangkalpinang</p>
-        </a>
+    @if ($linkPemda->isNotEmpty())
+      @php $totalPemda = $linkPemda->count(); @endphp
+      <div class="relative rounded-b-lg bg-white py-5" x-data="{ current: 0, perPage: 4 }" x-init="perPage = window.innerWidth < 768 ? 2 : window.innerWidth < 1024 ? 3 : 4;
+      window.addEventListener('resize', () => { perPage = window.innerWidth < 768 ? 2 : window.innerWidth < 1024 ? 3 : 4; if (current > Math.max(0, {{ $totalPemda }} - perPage)) current = Math.max(0, {{ $totalPemda }} - perPage); })">
+        <div class="overflow-hidden px-4 md:px-8">
+          <div class="flex transition-transform duration-500"
+            :style="'transform: translateX(-' + (current * (100 / perPage)) + '%)'">
+            @foreach ($linkPemda as $link)
+              <div class="w-1/2 shrink-0 px-2 md:w-1/3 lg:w-1/4">
+                <a href="{{ $link->url }}" target="_blank" rel="noopener noreferrer"
+                  class="flex h-36 flex-col items-center justify-center gap-3 rounded-md border border-gray-300 bg-slate-50 p-4 shadow-sm duration-300 hover:-translate-y-1 hover:shadow-lg">
+                  @if ($link->gambar)
+                    <img src="{{ asset('storage/' . $link->gambar) }}" alt="{{ $link->judul }}"
+                      class="max-h-16 w-auto object-contain" />
+                  @endif
+                  <p class="text-center text-xs font-semibold">{{ $link->judul }}</p>
+                </a>
+              </div>
+            @endforeach
+          </div>
+        </div>
+        @if ($totalPemda > 1)
+          <button type="button" x-on:click="current = current > 0 ? current - 1 : 0"
+            x-bind:class="current === 0 ? 'opacity-20 cursor-not-allowed' : 'bg-slate-200 hover:bg-slate-300'"
+            class="absolute left-0 top-1/2 z-10 -translate-y-1/2 rounded-full p-2 shadow-md"
+            style="background-color: #e2e8f0">
+            <svg class="h-5 w-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <button type="button"
+            x-on:click="current = Math.min(current + 1, Math.max(0, {{ $totalPemda }} - perPage))"
+            x-bind:class="current >= Math.max(0, {{ $totalPemda }} - perPage) ? 'opacity-20 cursor-not-allowed' :
+                'bg-slate-200 hover:bg-slate-300'"
+            class="absolute right-0 top-1/2 z-10 -translate-y-1/2 rounded-full p-2 shadow-md"
+            style="background-color: #e2e8f0">
+            <svg class="h-5 w-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        @endif
       </div>
-      <div class="flex w-full items-center justify-evenly md:w-auto md:justify-center md:gap-5">
-        <a href="https://belitung.go.id/"
-          class="flex flex-col items-center justify-center gap-3 rounded-md border border-gray-300 bg-slate-50 p-4 shadow-sm duration-300 hover:-translate-y-1 hover:shadow-lg">
-          <img src="{{ asset('img/kab_belitung.png') }}" alt="Kabupaten Belitung" width="120" />
-          <p class="text-center text-xs font-semibold">Kabupaten<br />Belitung</p>
-        </a>
-        <a href="https://bangkabaratkab.go.id/"
-          class="flex flex-col items-center justify-center gap-3 rounded-md border border-gray-300 bg-slate-50 p-4 shadow-sm duration-300 hover:-translate-y-1 hover:shadow-lg">
-          <img src="{{ asset('img/kab_bangkabarat.png') }}" alt="Kabupaten Bangka Barat" width="120" />
-          <p class="text-center text-xs font-semibold">Kabupaten<br />Bangka Barat</p>
-        </a>
+    @else
+      <div class="flex items-center justify-center rounded-b-lg bg-white py-8">
+        <p class="text-sm text-slate-400">Belum ada link pemda.</p>
       </div>
-      <div class="flex w-full items-center justify-evenly md:w-auto md:justify-center md:gap-5">
-        <a href="https://bangkatengahkab.go.id/"
-          class="flex flex-col items-center justify-center gap-3 rounded-md border border-gray-300 bg-slate-50 p-4 shadow-sm duration-300 hover:-translate-y-1 hover:shadow-lg">
-          <img src="{{ asset('img/kab_bangkatengah.png') }}" alt="Kabupaten Bangka Tengah" width="120" />
-          <p class="text-center text-xs font-semibold">Kabupaten<br />Bangka Tengah</p>
-        </a>
-        <a href="https://bangkaselatankab.go.id/"
-          class="flex flex-col items-center justify-center gap-3 rounded-md border border-gray-300 bg-slate-50 p-4 shadow-sm duration-300 hover:-translate-y-1 hover:shadow-lg">
-          <img src="{{ asset('img/kab_bangkaselatan.png') }}" alt="Kabupaten Bangka Selatan" width="120" />
-          <p class="text-center text-xs font-semibold">Kabupaten<br />Bangka Selatan</p>
-        </a>
-      </div>
-      <div class="flex w-full items-center justify-evenly md:w-auto md:justify-center">
-        <a href="https://portal.beltim.go.id/"
-          class="flex flex-col items-center justify-center gap-3 rounded-md border border-gray-300 bg-slate-50 p-4 shadow-sm duration-300 hover:-translate-y-1 hover:shadow-lg">
-          <img src="{{ asset('img/kab_belitungtimur.png') }}" alt="Kabupaten Belitung Timur" width="120" />
-          <p class="text-center text-xs font-semibold">Kabupaten<br />Belitung Timur</p>
-        </a>
-      </div>
-    </div>
+    @endif
   </div>
   <!-- LINK PEMDA END -->
+
 </x-app-layout>
