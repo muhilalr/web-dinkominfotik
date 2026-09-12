@@ -13,12 +13,23 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class VideoKegiatanResource extends Resource
 {
     protected static ?string $model = VideoKegiatan::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedVideoCamera;
+
+    protected static string|UnitEnum|null $navigationGroup = 'Media & Informasi';
+
+    protected static ?int $navigationSort = 2;
+
+    protected static ?string $navigationLabel = 'Video Kegiatan';
+
+    protected static ?string $modelLabel = 'Video Kegiatan';
+
+    protected static ?string $pluralModelLabel = 'Video Kegiatan';
 
     protected static ?string $recordTitleAttribute = 'judul';
 

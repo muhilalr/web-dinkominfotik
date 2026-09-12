@@ -13,12 +13,23 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class PageResource extends Resource
 {
     protected static ?string $model = Page::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentText;
+
+    protected static string|UnitEnum|null $navigationGroup = 'Publikasi';
+
+    protected static ?int $navigationSort = 4;
+
+    protected static ?string $navigationLabel = 'Pages/Halaman';
+
+    protected static ?string $modelLabel = 'Pages/Halaman';
+
+    protected static ?string $pluralModelLabel = 'Pages/Halaman';
 
     protected static ?string $recordTitleAttribute = 'judul';
 

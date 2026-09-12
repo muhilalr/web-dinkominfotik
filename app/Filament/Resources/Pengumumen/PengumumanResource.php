@@ -13,12 +13,23 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class PengumumanResource extends Resource
 {
     protected static ?string $model = Pengumuman::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedMegaphone;
+
+    protected static string|UnitEnum|null $navigationGroup = 'Publikasi';
+
+    protected static ?int $navigationSort = 3;
+
+    protected static ?string $navigationLabel = 'Pengumuman';
+
+    protected static ?string $modelLabel = 'Pengumuman';
+
+    protected static ?string $pluralModelLabel = 'Pengumuman';
 
     protected static ?string $recordTitleAttribute = 'judul';
 

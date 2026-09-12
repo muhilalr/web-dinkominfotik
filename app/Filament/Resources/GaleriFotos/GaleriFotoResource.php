@@ -13,12 +13,23 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class GaleriFotoResource extends Resource
 {
     protected static ?string $model = GaleriFoto::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedPhoto;
+
+    protected static string|UnitEnum|null $navigationGroup = 'Media & Informasi';
+
+    protected static ?int $navigationSort = 1;
+
+    protected static ?string $navigationLabel = 'Galeri Foto';
+
+    protected static ?string $modelLabel = 'Galeri Foto';
+
+    protected static ?string $pluralModelLabel = 'Galeri Foto';
 
     protected static ?string $recordTitleAttribute = 'judul';
 

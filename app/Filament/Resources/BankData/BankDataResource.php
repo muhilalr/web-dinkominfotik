@@ -13,12 +13,23 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class BankDataResource extends Resource
 {
     protected static ?string $model = BankData::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedFolderArrowDown;
+
+    protected static string|UnitEnum|null $navigationGroup = 'Media & Informasi';
+
+    protected static ?int $navigationSort = 3;
+
+    protected static ?string $navigationLabel = 'Bank Data';
+
+    protected static ?string $modelLabel = 'Bank Data';
+
+    protected static ?string $pluralModelLabel = 'Bank Data';
 
     protected static ?string $recordTitleAttribute = 'judul';
 

@@ -13,12 +13,23 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class LinkEksternalResource extends Resource
 {
     protected static ?string $model = LinkEksternal::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowTopRightOnSquare;
+
+    protected static string|UnitEnum|null $navigationGroup = 'Tampilan & Navigasi';
+
+    protected static ?int $navigationSort = 3;
+
+    protected static ?string $navigationLabel = 'Link Eksternal';
+
+    protected static ?string $modelLabel = 'Link Eksternal';
+
+    protected static ?string $pluralModelLabel = 'Link Eksternal';
 
     protected static ?string $recordTitleAttribute = 'judul';
 
