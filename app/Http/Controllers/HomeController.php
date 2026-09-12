@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\BankData;
 use App\Models\Banner;
 use App\Models\GaleriFoto;
+use App\Models\HeroSlider;
 use App\Models\LinkEksternal;
 use App\Models\Pengumuman;
 use App\Models\Post;
+use App\Models\SiteSetting;
 use App\Models\VideoKegiatan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -25,9 +27,9 @@ class HomeController extends Controller
             ->latest('published_at')
             ->first()
             ?? Post::where('is_published', true)
-            ->with('kategori')
-            ->latest('published_at')
-            ->first();
+                ->with('kategori')
+                ->latest('published_at')
+                ->first();
 
         $beritas = Post::where('tipe', 'berita')
             ->where('is_published', true)
@@ -102,7 +104,12 @@ class HomeController extends Controller
             ->orderBy('created_at', 'asc')
             ->get();
 
-        return view('welcome', compact('headline', 'beritas', 'artikels', 'terbaru', 'terpopuler', 'bankDatas', 'banners', 'galeriFotos', 'videoKegiatans', 'pengumuman', 'linkLayanan', 'linkPemda'));
+        $siteSetting = SiteSetting::firstOrCreate([]);
+        $heroSliders = HeroSlider::where('is_active', true)
+            ->orderBy('urutan')
+            ->get();
+
+        return view('welcome', compact('headline', 'beritas', 'artikels', 'terbaru', 'terpopuler', 'bankDatas', 'banners', 'galeriFotos', 'videoKegiatans', 'pengumuman', 'linkLayanan', 'linkPemda', 'siteSetting', 'heroSliders'));
     }
 
     /**

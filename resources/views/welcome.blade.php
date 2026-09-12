@@ -1,32 +1,28 @@
 <x-app-layout>
   <!-- JUMBOTRON START -->
-  <section x-data="{ current: 0, total: 5 }" x-init="setInterval(() => { current = (current + 1) % total }, 4000)">
+  @php
+    $defaultSliders = [
+        asset('img/view-1.jfif'),
+        asset('img/view-2.jfif'),
+        asset('img/view-3.jfif'),
+        asset('img/view-4.jfif'),
+        asset('img/view-5.jfif'),
+    ];
+    $sliders = $heroSliders->isNotEmpty() 
+        ? $heroSliders->map(fn($s) => asset('storage/' . $s->gambar))->toArray() 
+        : $defaultSliders;
+  @endphp
+  <section
+    x-data="{ current: 0, total: {{ count($sliders) }} }"
+    x-init="setInterval(() => { current = (current + 1) % total }, 4000)">
     <div class="relative mt-16 h-72 overflow-hidden md:h-screen lg:mt-0">
-      <div x-show="current === 0" x-transition:enter="transition ease-in-out duration-1000"
-        x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
-        x-transition:leave="transition ease-in-out duration-1000" x-transition:leave-start="opacity-100"
-        x-transition:leave-end="opacity-0" class="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style="background-image: url('{{ asset('img/view-1.jfif') }}')"></div>
-      <div x-show="current === 1" x-transition:enter="transition ease-in-out duration-1000"
-        x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
-        x-transition:leave="transition ease-in-out duration-1000" x-transition:leave-start="opacity-100"
-        x-transition:leave-end="opacity-0" class="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style="background-image: url('{{ asset('img/view-2.jfif') }}'); display: none;"></div>
-      <div x-show="current === 2" x-transition:enter="transition ease-in-out duration-1000"
-        x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
-        x-transition:leave="transition ease-in-out duration-1000" x-transition:leave-start="opacity-100"
-        x-transition:leave-end="opacity-0" class="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style="background-image: url('{{ asset('img/view-3.jfif') }}'); display: none;"></div>
-      <div x-show="current === 3" x-transition:enter="transition ease-in-out duration-1000"
-        x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
-        x-transition:leave="transition ease-in-out duration-1000" x-transition:leave-start="opacity-100"
-        x-transition:leave-end="opacity-0" class="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style="background-image: url('{{ asset('img/view-4.jfif') }}'); display: none;"></div>
-      <div x-show="current === 4" x-transition:enter="transition ease-in-out duration-1000"
-        x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
-        x-transition:leave="transition ease-in-out duration-1000" x-transition:leave-start="opacity-100"
-        x-transition:leave-end="opacity-0" class="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style="background-image: url('{{ asset('img/view-5.jfif') }}'); display: none;"></div>
+      @foreach($sliders as $index => $imgUrl)
+        <div x-show="current === {{ $index }}" x-transition:enter="transition ease-in-out duration-1000"
+          x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+          x-transition:leave="transition ease-in-out duration-1000" x-transition:leave-start="opacity-100"
+          x-transition:leave-end="opacity-0" class="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style="background-image: url('{{ $imgUrl }}')"></div>
+      @endforeach
       <div id="home"
         class="relative z-10 flex h-full w-full flex-col items-center justify-center gap-4 bg-black/60 text-white lg:gap-12">
         <h1 class="text-center text-base font-bold leading-relaxed lg:text-4xl">

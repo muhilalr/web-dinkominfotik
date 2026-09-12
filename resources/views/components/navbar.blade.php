@@ -19,7 +19,8 @@
   <div class="container relative">
     <div class="relative flex items-center justify-between px-4 py-2">
       <a href="{{ url('/') }}">
-        <img src="{{ asset('img/logo-dinkominfotik.png') }}" alt="Dinkominfotik" width="150" />
+        <img src="{{ !empty($siteSetting?->logo) ? asset('storage/' . $siteSetting->logo) : asset('img/logo-dinkominfotik.png') }}"
+          alt="Dinkominfotik" width="150" />
       </a>
 
       <div class="flex items-center">
