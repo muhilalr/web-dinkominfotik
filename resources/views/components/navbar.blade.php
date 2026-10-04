@@ -77,7 +77,8 @@
             @foreach ($menus as $menu)
               @if ($menu->children->count())
                 <li class="relative" x-data="{ open: false, flip: false }"
-                  @mouseenter="open = true; $nextTick(() => { const r = $refs.menu.getBoundingClientRect(); flip = r.left < 0 })"
+                  @mouseenter="open = true; $nextTick(() => { flip = $refs.menu.getBoundingClientRect().right > window.innerWidth - 8 })"
+                  @resize.window="if (open) { $nextTick(() => { flip = $refs.menu.getBoundingClientRect().right > window.innerWidth - 8 }) }"
                   @mouseleave="open = false; flip = false">
                   <button
                     class="flex cursor-pointer items-center gap-1.5 rounded-lg px-3 py-2 text-xs font-medium text-white transition-colors hover:bg-white/10 xl:px-3.5">
@@ -93,7 +94,7 @@
                     x-transition:leave="transition ease-in duration-100" x-transition:leave-start="opacity-100"
                     x-transition:leave-end="opacity-0"
                     class="bg-utama min-w-50 absolute top-full z-50 mt-1 rounded-xl py-2 text-white shadow-xl"
-                    :class="flip ? 'left-0' : 'right-0'">
+                    :class="flip ? 'right-0' : 'left-0'">
                     @foreach ($menu->children as $child)
                       <li><a href="{{ $child->getUrl() }}"
                           class="mx-1 block rounded-lg px-4 py-2 text-xs font-medium hover:bg-white/10">{{ $child->judul }}</a>

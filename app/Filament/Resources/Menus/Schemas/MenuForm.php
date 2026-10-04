@@ -47,7 +47,8 @@ class MenuForm
 
                 TextInput::make('url')
                     ->label('URL')
-                    ->url()
+                    ->type('text')
+                    ->url(fn ($get) => $get('url') !== '#')
                     ->required(fn ($get) => $get('tipe') === 'url')
                     ->visible(fn ($get) => $get('tipe') === 'url'),
 
