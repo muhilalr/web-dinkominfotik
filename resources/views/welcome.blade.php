@@ -141,6 +141,12 @@
                     <p class="mt-1 text-[11px] text-slate-400">{{ $berita->published_at?->diffForHumans() ?? '' }}</p>
                   </div>
                 </div>
+              @empty
+                <div class="flex min-h-32 flex-1 items-center justify-center text-center">
+                  <p class="text-sm text-slate-400">Belum ada berita terkini.</p>
+                </div>
+              @endforelse
+              @if ($beritas->isNotEmpty())
                 <div class="mt-auto border-t border-slate-100 pt-3 text-center">
                   <a href="{{ route('posts.berita') }}"
                     class="text-utama inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-slate-50 px-5 py-2 text-xs font-semibold transition-all hover:bg-slate-100 hover:text-blue-900">
@@ -151,11 +157,7 @@
                     </svg>
                   </a>
                 </div>
-              @empty
-                <div class="flex min-h-32 flex-1 items-center justify-center text-center">
-                  <p class="text-sm text-slate-400">Belum ada berita terkini.</p>
-                </div>
-              @endforelse
+              @endif
             </div>
 
             <!-- LIST ARTIKEL -->
@@ -178,6 +180,12 @@
                     </p>
                   </div>
                 </div>
+              @empty
+                <div class="flex min-h-32 flex-1 items-center justify-center text-center">
+                  <p class="text-sm text-slate-400">Belum ada artikel.</p>
+                </div>
+              @endforelse
+              @if ($artikels->isNotEmpty())
                 <div class="mt-auto border-t border-slate-100 pt-3 text-center">
                   <a href="{{ route('posts.artikel') }}"
                     class="text-utama inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-slate-50 px-5 py-2 text-xs font-semibold transition-all hover:bg-slate-100 hover:text-blue-900">
@@ -188,11 +196,7 @@
                     </svg>
                   </a>
                 </div>
-              @empty
-                <div class="flex min-h-32 flex-1 items-center justify-center text-center">
-                  <p class="text-sm text-slate-400">Belum ada artikel.</p>
-                </div>
-              @endforelse
+              @endif
 
             </div>
           </div>

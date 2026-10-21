@@ -61,7 +61,8 @@ class PostForm
                 Toggle::make('is_published')
                     ->label('Publikasikan')
                     ->required(),
-                DateTimePicker::make('published_at'),
+                DateTimePicker::make('published_at')
+                    ->timezone(config('app.timezone')),
             ]);
     }
 }
